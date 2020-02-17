@@ -21,7 +21,7 @@ node {
    sh label: 'COMPILE', script: 'mvn compile'
   }
   stage('Sonar Analysis'){
-        withSonarQubeEnv('Sonarqube'){
+        withSonarQubeEnv('SonarQube server'){
          sh 'mvn sonar:sonar'
         }
         }
