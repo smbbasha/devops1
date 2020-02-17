@@ -54,18 +54,6 @@ def server= Artifactory.server 'jfrog'
    stage('Docker-Stage-Deployment') {
    sh label: 'DOCKER DEPLOYMENT', script: 'docker-compose up -d --build'
   }
-	 
- stage('Input for deploy in production server') {            
-   input('Do you want to deploy into production server proceed?')
-        }
-  stage('Geting Ready For Ansible') {
-  sh label: 'Jenkins', script: "echo '<h1> TASK BUILD ID: ${env.BUILD_DISPLAY_NAME}</h1>' > index.html"
-}  
-   
-   stage('Prod Deployment on AWS'){
-   sh label: 'terraform', script: '/bin/terraform  init'
-   sh label: 'terraform', script: '/bin/terraform  apply -input=false -auto-approve'
-   }
 }
 
 notify('Job Completed')   
@@ -77,7 +65,7 @@ notify('Job Completed')
 
 def notify(status){
     emailext (
-	to: "chakradhar1998@outlook.com",
+	to: "mansoor4win@outlook.com",
 	subject: "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
 	 body: """<p>${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
 	<p>Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>""",
